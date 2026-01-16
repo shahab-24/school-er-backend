@@ -5,6 +5,8 @@ const router = Router();
 
 router.post("/", StudentController.create);
 router.get("/", StudentController.list);
-router.get("/:id", StudentController.get);
+router.get("/:studentUid", StudentController.get);
+router.patch("/:studentUid/status", StudentController.updateStatus);
+router.post("/:studentUid/promote", StudentController.promote);
 
 export default router;

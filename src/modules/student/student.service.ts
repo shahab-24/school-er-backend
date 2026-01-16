@@ -1,25 +1,38 @@
 import { Student } from "./student.model";
 
-const generateStudentId = async () => {
-  const count = await Student.countDocuments();
-  return `STD-${(count + 1).toString().padStart(6, "0")}`;
-};
-
 export const StudentService = {
   async create(payload: any) {
-    const studentId = await generateStudentId();
-    return Student.create({ ...payload, studentId });
+    return Student.create(payload);
   },
 
   async list(query: any) {
-    const { search } = query;
-    if (search) {
-      return Student.find({ $text: { $search: search } }).lean();
-    }
-    return Student.find().lean();
+    return Student.find(query).lean();
   },
 
-  async getById(id: string) {
-    return Student.findById(id).lean();
+  async getByUid(studentUid: string) {
+    return Student.findOne({ studentUid }).lean();
+  },
+
+  async updateStatus(studentUid: string, status: string) {
+    const update: any = { status };
+    if (status === "archived") update.archivedAt = new Date();
+    return Student.findOneAndUpdate({ studentUid }, update, {
+      new: true,
+    }).lean();
+  },
+
+  async promote(studentUid: string, entry: any) {
+    return Student.findOneAndUpdate(
+      { studentUid },
+      {
+        $push: { promotions: entry },
+        $set: {
+          status: entry.result === "repeat" ? "repeat" : "active",
+          "current.class": entry.toClass,
+          "current.roll": entry.newRoll,
+        },
+      },
+      { new: true }
+    ).lean();
   },
 };

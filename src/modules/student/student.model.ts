@@ -1,46 +1,70 @@
 import { Schema, model } from "mongoose";
 
+const LocalizedSchema = new Schema({}, { strict: false, _id: false });
+
+const GuardianSchema = new Schema(
+  {
+    relation: {
+      type: String,
+      enum: ["father", "mother", "guardian"],
+      required: true,
+    },
+    name: { type: LocalizedSchema, required: true },
+    mobile: String,
+    nid: String,
+    birthRegistration: String,
+  },
+  { _id: false }
+);
+
+const PromotionSchema = new Schema(
+  {
+    session: { type: String, required: true },
+    fromClass: { type: Number, required: true },
+    toClass: { type: Number, required: true },
+    result: { type: String, enum: ["promoted", "repeat"], required: true },
+    previousRoll: Number,
+    newRoll: Number,
+    decidedAt: { type: Date, default: Date.now },
+  },
+  { _id: false }
+);
+
 const StudentSchema = new Schema(
   {
-    studentId: { type: String, required: true, unique: true, index: true },
+    studentUid: { type: String, required: true, unique: true, index: true },
 
-    nameEn: { type: String, required: true, trim: true },
-    nameBn: { type: String, required: true, trim: true },
-    nameChakma: { type: String, trim: true },
+    name: { type: LocalizedSchema, required: true },
+    gender: { type: String, enum: ["male", "female", "other"] },
+    religion: { type: String },
+    birthDate: { type: Date },
 
-    fatherNameEn: { type: String, required: true, trim: true },
-    fatherNameBn: { type: String, required: true, trim: true },
+    birthRegistration: String,
+    languagePreference: { type: String, default: "en" },
 
-    motherNameEn: { type: String, required: true, trim: true },
-    motherNameBn: { type: String, required: true, trim: true },
+    guardians: { type: [GuardianSchema], default: [] },
 
-    gender: { type: String, enum: ["male", "female", "other"], required: true },
-    religion: { type: String, required: true },
+    imageUrl: String,
 
-    birthDate: { type: Date, required: true },
+    current: {
+      session: { type: String, index: true },
+      class: { type: Number, index: true },
+      roll: { type: Number },
+    },
 
-    studentBirthReg: { type: String, required: true, index: true },
-    fatherBirthReg: { type: String },
-    motherBirthReg: { type: String },
+    status: {
+      type: String,
+      enum: ["active", "repeat", "passed", "transferred", "archived"],
+      default: "active",
+      index: true,
+    },
 
-    fatherNID: { type: String },
-    motherNID: { type: String },
+    promotions: { type: [PromotionSchema], default: [] },
 
-    mobile: { type: String, required: true, index: true },
-
-    language: { type: String, enum: ["bn", "en", "chakma"], default: "bn" },
-
-    imageUrl: { type: String },
+    archivedAt: Date,
   },
   { timestamps: true }
 );
 
-// Text index for fast search
-StudentSchema.index({
-  nameEn: "text",
-  nameBn: "text",
-  studentId: "text",
-  mobile: "text",
-});
-
+StudentSchema.index({ "current.session": 1, "current.class": 1 });
 export const Student = model("Student", StudentSchema);

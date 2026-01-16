@@ -1,30 +1,43 @@
 import { z } from "zod";
 
+const localized = z.record(z.string().min(1));
+
 export const createStudentSchema = z.object({
-  nameEn: z.string().min(2),
-  nameBn: z.string().min(2),
-  nameChakma: z.string().optional(),
-
-  fatherNameEn: z.string().min(2),
-  fatherNameBn: z.string().min(2),
-
-  motherNameEn: z.string().min(2),
-  motherNameBn: z.string().min(2),
-
-  gender: z.enum(["male", "female", "other"]),
-  religion: z.string(),
-
-  birthDate: z.string(), // ISO date
-
-  studentBirthReg: z.string(),
-  fatherBirthReg: z.string().optional(),
-  motherBirthReg: z.string().optional(),
-
-  fatherNID: z.string().optional(),
-  motherNID: z.string().optional(),
-
-  mobile: z.string().min(10),
-
-  language: z.enum(["bn", "en", "chakma"]).optional(),
+  studentUid: z.string().min(3),
+  name: localized,
+  gender: z.enum(["male", "female", "other"]).optional(),
+  religion: z.string().optional(),
+  birthDate: z.string().optional(),
+  birthRegistration: z.string().optional(),
+  languagePreference: z.string().optional(),
+  guardians: z
+    .array(
+      z.object({
+        relation: z.enum(["father", "mother", "guardian"]),
+        name: localized,
+        mobile: z.string().optional(),
+        nid: z.string().optional(),
+        birthRegistration: z.string().optional(),
+      })
+    )
+    .optional(),
   imageUrl: z.string().url().optional(),
+  current: z.object({
+    session: z.string(),
+    class: z.number().int().positive(),
+    roll: z.number().int().positive().optional(),
+  }),
+});
+
+export const updateStatusSchema = z.object({
+  status: z.enum(["active", "repeat", "passed", "transferred", "archived"]),
+});
+
+export const promoteSchema = z.object({
+  session: z.string(),
+  fromClass: z.number().int().positive(),
+  toClass: z.number().int().positive(),
+  result: z.enum(["promoted", "repeat"]),
+  previousRoll: z.number().int().optional(),
+  newRoll: z.number().int().optional(),
 });

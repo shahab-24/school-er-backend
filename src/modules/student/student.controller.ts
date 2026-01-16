@@ -1,22 +1,41 @@
 import { Request, Response } from "express";
 import { StudentService } from "./student.service";
-import { createStudentSchema } from "./student.validation";
+import {
+  createStudentSchema,
+  updateStatusSchema,
+  promoteSchema,
+} from "./student.validation";
 
 export const StudentController = {
   async create(req: Request, res: Response) {
-    const parsed = createStudentSchema.parse(req.body);
-    const student = await StudentService.create(parsed);
-    res.status(201).json(student);
+    const data = createStudentSchema.parse(req.body);
+    const doc = await StudentService.create(data);
+    res.status(201).json(doc);
   },
 
   async list(req: Request, res: Response) {
-    const students = await StudentService.list(req.query);
-    res.json(students);
+    const docs = await StudentService.list(req.query);
+    res.json(docs);
   },
 
   async get(req: Request, res: Response) {
-    const student = await StudentService.getById(req.params.id);
-    if (!student) return res.status(404).json({ message: "Not found" });
-    res.json(student);
+    const doc = await StudentService.getByUid(req.params.studentUid);
+    if (!doc) return res.status(404).json({ message: "Not found" });
+    res.json(doc);
+  },
+
+  async updateStatus(req: Request, res: Response) {
+    const { status } = updateStatusSchema.parse(req.body);
+    const doc = await StudentService.updateStatus(
+      req.params.studentUid,
+      status
+    );
+    res.json(doc);
+  },
+
+  async promote(req: Request, res: Response) {
+    const entry = promoteSchema.parse(req.body);
+    const doc = await StudentService.promote(req.params.studentUid, entry);
+    res.json(doc);
   },
 };

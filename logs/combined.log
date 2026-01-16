@@ -22,3 +22,7 @@
 {"level":"info","message":"HTTP server closed","service":"school-erp-backend","timestamp":"2026-01-12 19:23:18"}
 {"level":"warn","message":"Mongoose disconnected from DB","service":"school-erp-backend","timestamp":"2026-01-12 19:49:31"}
 {"level":"info","message":"Mongoose connected to DB","service":"school-erp-backend","timestamp":"2026-01-12 19:49:39"}
+{"level":"warn","message":"Mongoose disconnected from DB","service":"school-erp-backend","timestamp":"2026-01-12 20:45:30"}
+{"level":"info","message":"Mongoose connected to DB","service":"school-erp-backend","timestamp":"2026-01-12 20:45:30"}
+{"level":"warn","message":"Mongoose disconnected from DB","service":"school-erp-backend","timestamp":"2026-01-12 21:00:06"}
+{"level":"info","message":"Mongoose connected to DB","service":"school-erp-backend","timestamp":"2026-01-12 21:00:06"}

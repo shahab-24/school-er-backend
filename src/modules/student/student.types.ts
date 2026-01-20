@@ -24,3 +24,12 @@ export interface PromotionEntry {
   newRoll?: number;
   decidedAt: Date;
 }
+export interface StipendBeneficiary {
+  name: string;
+  mobile: string;
+  relation: "father" | "mother" | "guardian" | "other";
+  paymentMethod: "mobile_banking" | "bank" | "cash";
+  walletProvider?: "bKash" | "Nagad" | "Rocket" | "Other";
+  isActive: boolean;
+  updatedAt: Date;
+}

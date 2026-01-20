@@ -1,9 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const auth_1 = require("../../core/errors/middleware/auth");
+const requireRole_1 = require("../../core/errors/middleware/requireRole");
 const student_controller_1 = require("./student.controller");
 const router = (0, express_1.Router)();
 router.post("/", student_controller_1.StudentController.create);
 router.get("/", student_controller_1.StudentController.list);
-router.get("/:id", student_controller_1.StudentController.get);
+router.get("/:studentUid", student_controller_1.StudentController.get);
+router.patch("/:studentUid/status", student_controller_1.StudentController.updateStatus);
+router.post("/:studentUid/promote", student_controller_1.StudentController.promote);
+router.post("/", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN"), student_controller_1.StudentController.create);
+router.get("/", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN", "TEACHER"), student_controller_1.StudentController.list);
+router.get("/:studentUid", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN", "TEACHER"), student_controller_1.StudentController.get);
+router.patch("/:studentUid/status", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN"), student_controller_1.StudentController.updateStatus);
+router.post("/:studentUid/promote", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN"), student_controller_1.StudentController.promote);
+router.patch("/:studentUid/stipend-beneficiary", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN"), student_controller_1.StudentController.updateStipendBeneficiary);
+router.get("/:studentUid/stipend-beneficiary", (0, auth_1.auth)(), (0, requireRole_1.requireRole)("SCHOOL_ADMIN", "TEACHER"), student_controller_1.StudentController.getStipendBeneficiary);
 exports.default = router;
+//# sourceMappingURL=student.routes.js.map

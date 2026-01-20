@@ -9,4 +9,5 @@ export interface JwtPayload {
   userId: string;
   role: Role;
   schoolId?: string;
+  // email?: string;
 }

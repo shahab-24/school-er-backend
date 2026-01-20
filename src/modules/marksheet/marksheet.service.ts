@@ -3,6 +3,7 @@ import { renderMarksheetHTML } from "./templates/marksheet.html";
 import { MarksheetQuery } from "./marksheet.types";
 import QRCode from "qrcode";
 import puppeteer from "puppeteer";
+import { safeString, safeNumber } from "../../utils/typesafe-wrapper";
 
 const schoolProfile = {
   nameEn: process.env.SCHOOL_NAME_EN || "School Name",
@@ -24,7 +25,7 @@ export const MarksheetService = {
     const snap = await ResultSnapshot.findOne(q).lean();
     if (!snap) throw new Error("Result snapshot not found");
 
-    // QR payload (safe, non-sensitive)
+    // QR payload
     const qrPayload = {
       studentId: snap.studentId,
       session: snap.session,
@@ -40,10 +41,10 @@ export const MarksheetService = {
       student: { studentId: snap.studentId },
       meta: {
         scope: snap.scope,
-        terminalLabel: snap.terminalKey,
+        terminalLabel: safeString(snap.terminalKey),
         session: snap.session,
         class: snap.class,
-        position: snap.position,
+        position: safeNumber(snap.position),
       },
       subjects: snap.subjects.map((s: any) => ({
         subjectId: s.subjectId,
@@ -59,9 +60,9 @@ export const MarksheetService = {
       qrBase64,
     });
 
-    // Puppeteer PDF
+    // Puppeteer PDF - FIXED: Type assertion for headless
     const browser = await puppeteer.launch({
-      headless: "new",
+      headless: (process.env.NODE_ENV === "production" ? true : "new") as any,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 

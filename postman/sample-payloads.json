@@ -1,0 +1,93 @@
+{
+  "AUTH": {
+    "login": {
+      "email": "admin@school.com",
+      "password": "password123"
+    }
+  },
+
+  "STUDENT": {
+    "create": {
+      "studentUid": "STD-1001",
+      "name": { "en": "Rahim Ahmed", "bn": "রহিম আহমেদ" },
+      "gender": "male",
+      "religion": "islam",
+      "birthDate": "2014-05-10",
+      "birthRegistration": "2014123456789",
+      "current": { "class": 5, "roll": 12, "session": "2024" }
+    }
+  },
+
+  "STIPEND": {
+    "updateBeneficiary": {
+      "name": "Abdul Karim",
+      "mobile": "01711111111",
+      "relation": "father",
+      "paymentMethod": "mobile_banking",
+      "walletProvider": "bKash"
+    }
+  },
+
+  "ACADEMIC_RECORD": {
+    "draft_terminal": {
+      "studentId": "STD-1001",
+      "class": 5,
+      "session": "2024",
+      "scope": "terminal",
+      "terminalKey": "T1",
+      "marks": [
+        {
+          "subjectId": "math",
+          "components": [
+            {
+              "type": "written",
+              "rawScore": 70,
+              "maxScore": 100,
+              "weight": 70
+            },
+            {
+              "type": "class_test",
+              "rawScore": 25,
+              "maxScore": 30,
+              "weight": 30
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  "ACADEMIC_ACTIONS": {
+    "submit": {
+      "studentId": "STD-1001",
+      "class": 5,
+      "session": "2024",
+      "scope": "terminal",
+      "terminalKey": "T1"
+    },
+    "publish": {
+      "class": 5,
+      "session": "2024",
+      "scope": "terminal",
+      "terminalKey": "T1"
+    }
+  },
+
+  "PROMOTION": {
+    "promoteStudent": {
+      "session": "2024",
+      "fromClass": 5,
+      "toClass": 6,
+      "result": "promoted",
+      "previousRoll": 12,
+      "newRoll": 5
+    }
+  },
+
+  "PUBLIC_VERIFY": {
+    "resultQR": {
+      "studentUid": "STD-1001",
+      "type": "RESULT"
+    }
+  }
+}

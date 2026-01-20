@@ -1,92 +1,125 @@
+// src/app.ts - PRODUCTION READY VERSION
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
-import { schoolConfig } from "./config/index.js";
-import { Logger } from "./utils/logger.js";
+import { schoolConfig } from "./config";
+import { Logger } from "./utils/logger";
 import mongoose from "mongoose";
 import routes from "./routes";
+import { requestLogger } from "./core/logger/requestLogger.middleware";
+import { errorHandler } from "./core/errors/error.middleware";
+import { authLimiter, publicLimiter } from "./core/security/rateLimit";
 
 const app = express();
 
-// Security middleware
-app.use(helmet());
+// ========== SECURITY MIDDLEWARE ==========
 app.use(
-  cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? ["https://yourdomain.com"]
-        : ["http://localhost:3000"],
-    credentials: true,
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https:"],
+      },
+    },
   })
 );
 
-// Performance middleware
+// CORS configuration
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? ["https://yourdomain.com", "https://www.yourdomain.com"]
+      : ["http://localhost:3000", "http://localhost:5173"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
+
+// ========== PERFORMANCE MIDDLEWARE ==========
 app.use(compression());
 
-// Body parsing with limits
+// ========== BODY PARSING ==========
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-// Rate limiting
-const limiter = rateLimit({
+// ========== LOGGING MIDDLEWARE ==========
+app.use(requestLogger);
+
+// ========== RATE LIMITING ==========
+// Global rate limiter
+const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
-  message: "Too many requests from this IP, please try again later.",
+  message: {
+    success: false,
+    message: "Too many requests from this IP, please try again later.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
 });
-app.use("/api", limiter);
 
-// Health check endpoint
+// Apply global limiter to all routes
+app.use("/api", globalLimiter);
+
+// ========== HEALTH CHECK ==========
 app.get("/health", (_req, res) => {
+  const dbStatus =
+    mongoose.connection.readyState === 1 ? "connected" : "disconnected";
+
   const healthStatus = {
     status: "ok",
     timestamp: new Date().toISOString(),
     school: schoolConfig.nameEn,
     established: schoolConfig.established,
-    environment: process.env.NODE_ENV,
-    database:
-      mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+    environment: process.env.NODE_ENV || "development",
+    database: dbStatus,
     uptime: process.uptime(),
     memory: process.memoryUsage(),
+    nodeVersion: process.version,
+    pid: process.pid,
   };
 
-  res.json(healthStatus);
+  res.status(200).json(healthStatus);
 });
 
-// Error handling middleware
-app.use(
-  (
-    err: Error,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
-    Logger.error("Unhandled error:", err);
+// ========== ROOT ROUTE ==========
+app.get("/", (_req, res) => {
+  res.json({
+    success: true,
+    message: "School ERP API",
+    version: "1.0.0",
+    school: schoolConfig.nameEn,
+    documentation: "/api-docs",
+    health: "/health",
+    timestamp: new Date().toISOString(),
+  });
+});
 
-    res.status(500).json({
-      success: false,
-      message:
-        process.env.NODE_ENV === "production"
-          ? "Internal server error"
-          : err.message,
-      stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
-    });
-  }
-);
+// ========== API ROUTES ==========
+// Apply specific rate limiters before routes
+app.use("/api/v1/auth", authLimiter);
+app.use("/api/v1/public", publicLimiter);
 
-
+// Mount all routes under /api/v1
 app.use("/api/v1", routes);
 
-
-
-// 404 handler
-app.use("*", (req, res) => {
+// ========== ERROR HANDLING ==========
+// 404 handler - MUST BE BEFORE errorHandler
+app.use("*", (_req, res) => {
   res.status(404).json({
     success: false,
     message: "Route not found",
-    path: req.originalUrl,
+    path: _req.originalUrl,
+    timestamp: new Date().toISOString(),
   });
 });
+
+// Global error handler - MUST BE LAST
+app.use(errorHandler);
 
 export default app;

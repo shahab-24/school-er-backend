@@ -1,7 +1,13 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
+/**
+ * Localized text (EN/BN/Other)
+ */
 const LocalizedSchema = new Schema({}, { strict: false, _id: false });
 
+/**
+ * Guardian
+ */
 const GuardianSchema = new Schema(
   {
     relation: {
@@ -10,19 +16,26 @@ const GuardianSchema = new Schema(
       required: true,
     },
     name: { type: LocalizedSchema, required: true },
-    mobile: String,
-    nid: String,
-    birthRegistration: String,
+    mobile: { type: String },
+    nid: { type: String },
+    birthRegistration: { type: String },
   },
   { _id: false }
 );
 
+/**
+ * Promotion History
+ */
 const PromotionSchema = new Schema(
   {
     session: { type: String, required: true },
     fromClass: { type: Number, required: true },
     toClass: { type: Number, required: true },
-    result: { type: String, enum: ["promoted", "repeat"], required: true },
+    result: {
+      type: String,
+      enum: ["promoted", "repeat"],
+      required: true,
+    },
     previousRoll: Number,
     newRoll: Number,
     decidedAt: { type: Date, default: Date.now },
@@ -30,21 +43,73 @@ const PromotionSchema = new Schema(
   { _id: false }
 );
 
+/**
+ * ✅ Stipend Beneficiary (embedded, single source of truth)
+ */
+const StipendBeneficiarySchema = new Schema(
+  {
+    name: { type: String, required: true },
+    mobile: { type: String, required: true },
+
+    relation: {
+      type: String,
+      enum: ["father", "mother", "guardian", "other"],
+      required: true,
+    },
+
+    paymentMethod: {
+      type: String,
+      enum: ["mobile_banking", "bank", "cash"],
+      required: true,
+    },
+
+    walletProvider: {
+      type: String,
+      enum: ["bKash", "Nagad", "Rocket", "Other"],
+    },
+
+    isActive: { type: Boolean, default: true },
+    updatedAt: { type: Date, default: Date.now },
+  },
+  { _id: false }
+);
+
+/**
+ * Student
+ */
 const StudentSchema = new Schema(
   {
-    studentUid: { type: String, required: true, unique: true, index: true },
+    studentUid: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
 
     name: { type: LocalizedSchema, required: true },
-    gender: { type: String, enum: ["male", "female", "other"] },
+
+    gender: {
+      type: String,
+      enum: ["male", "female", "other"],
+    },
+
     religion: { type: String },
     birthDate: { type: Date },
+    birthRegistration: { type: String },
 
-    birthRegistration: String,
     languagePreference: { type: String, default: "en" },
 
     guardians: { type: [GuardianSchema], default: [] },
 
-    imageUrl: String,
+    /**
+     * ✅ stipend / upobritti receiver
+     */
+    stipendBeneficiary: {
+      type: StipendBeneficiarySchema,
+      required: false,
+    },
+
+    imageUrl: { type: String },
 
     current: {
       session: { type: String, index: true },
@@ -61,10 +126,11 @@ const StudentSchema = new Schema(
 
     promotions: { type: [PromotionSchema], default: [] },
 
-    archivedAt: Date,
+    archivedAt: { type: Date },
   },
   { timestamps: true }
 );
 
 StudentSchema.index({ "current.session": 1, "current.class": 1 });
+
 export const Student = model("Student", StudentSchema);

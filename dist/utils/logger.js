@@ -30,3 +30,4 @@ const logger = winston_1.default.createLogger({
     ],
 });
 exports.Logger = logger;
+//# sourceMappingURL=logger.js.map

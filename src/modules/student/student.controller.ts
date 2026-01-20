@@ -38,4 +38,30 @@ export const StudentController = {
     const doc = await StudentService.promote(req.params.studentUid, entry);
     res.json(doc);
   },
+  async updateStipendBeneficiary(req: Request, res: Response) {
+    const { studentUid } = req.params;
+    const data = req.body;
+
+    const student = await StudentService.updateStipendBeneficiary(
+      studentUid,
+      data
+    );
+
+    res.json({
+      success: true,
+      message: "Stipend beneficiary updated successfully",
+      data: student.stipendBeneficiary,
+    });
+  },
+
+  async getStipendBeneficiary(req: Request, res: Response) {
+    const { studentUid } = req.params;
+
+    const beneficiary = await StudentService.getStipendBeneficiary(studentUid);
+
+    res.json({
+      success: true,
+      data: beneficiary,
+    });
+  },
 };

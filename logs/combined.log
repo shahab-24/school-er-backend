@@ -26,3 +26,124 @@
 {"level":"info","message":"Mongoose connected to DB","service":"school-erp-backend","timestamp":"2026-01-12 20:45:30"}
 {"level":"warn","message":"Mongoose disconnected from DB","service":"school-erp-backend","timestamp":"2026-01-12 21:00:06"}
 {"level":"info","message":"Mongoose connected to DB","service":"school-erp-backend","timestamp":"2026-01-12 21:00:06"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-17 16:42:14"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-17 16:42:14"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-17 16:42:15"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-17 16:42:15"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-17 16:42:15"}
+{"level":"info","message":"\nSIGINT received, starting graceful shutdown...","service":"school-erp-backend","timestamp":"2026-01-17 16:49:17"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-17 16:49:22"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-17 16:49:22"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-17 16:49:22"}
+{"level":"info","message":"📊 PID: 16928","service":"school-erp-backend","timestamp":"2026-01-17 16:49:22"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-17 16:49:24"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-17 16:49:24"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-17 16:49:24"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-17 16:49:24"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 18:34:26"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 18:34:26"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 18:34:26"}
+{"level":"info","message":"📊 PID: 19332","service":"school-erp-backend","timestamp":"2026-01-19 18:34:26"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 18:34:28"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 18:34:28"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 18:34:28"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 18:34:28"}
+{"level":"warn","message":"⚠️ MongoDB disconnected","service":"school-erp-backend","timestamp":"2026-01-19 18:41:18"}
+{"level":"info","message":"✅ MongoDB connected to: school-erp","service":"school-erp-backend","timestamp":"2026-01-19 18:41:19"}
+{"level":"warn","message":"⚠️ MongoDB disconnected","service":"school-erp-backend","timestamp":"2026-01-19 18:41:30"}
+{"level":"info","message":"✅ MongoDB connected to: school-erp","service":"school-erp-backend","timestamp":"2026-01-19 18:41:40"}
+{"level":"info","message":"\nSIGINT received, starting graceful shutdown...","service":"school-erp-backend","timestamp":"2026-01-19 18:44:55"}
+{"level":"info","message":"✅ HTTP server closed","service":"school-erp-backend","timestamp":"2026-01-19 18:44:55"}
+{"level":"info","message":"\nSIGINT received, starting graceful shutdown...","service":"school-erp-backend","timestamp":"2026-01-19 18:44:55"}
+{"level":"info","message":"✅ HTTP server closed","service":"school-erp-backend","timestamp":"2026-01-19 18:44:55"}
+{"level":"warn","message":"⚠️ MongoDB disconnected","service":"school-erp-backend","timestamp":"2026-01-19 18:44:56"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 18:48:01"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 18:48:01"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 18:48:01"}
+{"level":"info","message":"📊 PID: 19380","service":"school-erp-backend","timestamp":"2026-01-19 18:48:01"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 18:48:04"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 18:48:04"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 18:48:04"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 18:48:04"}
+{"level":"info","message":"\nSIGINT received, starting graceful shutdown...","service":"school-erp-backend","timestamp":"2026-01-19 18:49:03"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 18:57:53"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 18:57:53"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 18:57:53"}
+{"level":"info","message":"📊 PID: 28356","service":"school-erp-backend","timestamp":"2026-01-19 18:57:53"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 18:57:55"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 18:57:55"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 18:57:55"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 18:57:55"}
+{"level":"info","message":"\nSIGINT received, starting graceful shutdown...","service":"school-erp-backend","timestamp":"2026-01-19 18:59:58"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:00:02"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:00:02"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:00:02"}
+{"level":"info","message":"📊 PID: 28328","service":"school-erp-backend","timestamp":"2026-01-19 19:00:02"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:00:04"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:00:04"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:00:04"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:00:04"}
+{"level":"info","message":"\nSIGINT received, starting graceful shutdown...","service":"school-erp-backend","timestamp":"2026-01-19 19:01:36"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:01:54"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:01:54"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:01:54"}
+{"level":"info","message":"📊 PID: 26936","service":"school-erp-backend","timestamp":"2026-01-19 19:01:54"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:01:56"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:01:56"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:01:56"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:01:56"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","level":"error","message":"⚠️ Unhandled Rejection at:","service":"school-erp-backend","timestamp":"2026-01-19 19:03:51"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:04:00"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:04:00"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:04:00"}
+{"level":"info","message":"📊 PID: 26064","service":"school-erp-backend","timestamp":"2026-01-19 19:04:00"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:04:01"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:04:01"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:04:01"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:04:01"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","level":"error","message":"⚠️ Unhandled Rejection at:","service":"school-erp-backend","timestamp":"2026-01-19 19:04:08"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:04:34"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:04:34"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:04:34"}
+{"level":"info","message":"📊 PID: 18544","service":"school-erp-backend","timestamp":"2026-01-19 19:04:34"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:04:35"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:04:35"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:04:35"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:04:35"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","level":"error","message":"⚠️ Unhandled Rejection at:","service":"school-erp-backend","timestamp":"2026-01-19 19:04:53"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:10:48"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:10:48"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:10:48"}
+{"level":"info","message":"📊 PID: 384","service":"school-erp-backend","timestamp":"2026-01-19 19:10:48"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:10:50"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:10:50"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:10:50"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:10:50"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","level":"error","message":"⚠️ Unhandled Rejection at:","service":"school-erp-backend","timestamp":"2026-01-19 19:10:55"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:27:21"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:27:21"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:27:21"}
+{"level":"info","message":"📊 PID: 22876","service":"school-erp-backend","timestamp":"2026-01-19 19:27:21"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:27:22"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:27:22"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:27:22"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:27:22"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","level":"error","message":"⚠️ Unhandled Rejection at:","service":"school-erp-backend","timestamp":"2026-01-19 19:27:35"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:28:20"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:28:20"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:28:20"}
+{"level":"info","message":"📊 PID: 28812","service":"school-erp-backend","timestamp":"2026-01-19 19:28:20"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:28:22"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:28:22"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:28:22"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:28:22"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","level":"error","message":"⚠️ Unhandled Rejection at:","service":"school-erp-backend","timestamp":"2026-01-19 19:28:27"}
+{"level":"info","message":"🚀 Starting School Management Server...","service":"school-erp-backend","timestamp":"2026-01-19 19:37:36"}
+{"level":"info","message":"📁 Environment: development","service":"school-erp-backend","timestamp":"2026-01-19 19:37:36"}
+{"level":"info","message":"🏫 School: KHIRAM GOVERNMENT PRIMARY SCHOOL","service":"school-erp-backend","timestamp":"2026-01-19 19:37:36"}
+{"level":"info","message":"📊 PID: 30032","service":"school-erp-backend","timestamp":"2026-01-19 19:37:36"}
+{"level":"info","message":"✅ MongoDB connected successfully","service":"school-erp-backend","timestamp":"2026-01-19 19:37:38"}
+{"level":"info","message":"✅ Server running on port 5000","service":"school-erp-backend","timestamp":"2026-01-19 19:37:38"}
+{"level":"info","message":"🌐 Health: http://localhost:5000/health","service":"school-erp-backend","timestamp":"2026-01-19 19:37:38"}
+{"level":"info","message":"📚 API: http://localhost:5000/","service":"school-erp-backend","timestamp":"2026-01-19 19:37:38"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","level":"error","message":"⚠️ Unhandled Rejection at:","service":"school-erp-backend","timestamp":"2026-01-19 19:38:08"}

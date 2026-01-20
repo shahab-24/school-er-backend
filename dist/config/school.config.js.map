@@ -1,0 +1,1 @@
+{"version":3,"file":"school.config.js","sourceRoot":"","sources":["../../src/config/school.config.ts"],"names":[],"mappings":";;;AAAa,QAAA,YAAY,GAAG;IAC1B,MAAM,EAAE,OAAO,CAAC,GAAG,CAAC,cAAwB;IAC5C,MAAM,EAAE,OAAO,CAAC,GAAG,CAAC,cAAwB;IAC5C,WAAW,EAAE,OAAO,CAAC,GAAG,CAAC,kBAA4B;IACrD,KAAK,EAAE,OAAO,CAAC,GAAG,CAAC,YAAsB;IACzC,OAAO,EAAE,OAAO,CAAC,GAAG,CAAC,cAAwB;CAC9C,CAAC"}

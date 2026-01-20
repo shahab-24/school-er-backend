@@ -1,4 +1,5 @@
 import { Student } from "./student.model";
+import { BadRequestError, NotFoundError } from "../../core/errors/";
 
 export const StudentService = {
   async create(payload: any) {
@@ -35,4 +36,38 @@ export const StudentService = {
       { new: true }
     ).lean();
   },
+
+   async updateStipendBeneficiary(studentUid: string, payload: any) {
+    const student = await Student.findOne({ studentUid });
+    if (!student) throw new NotFoundError("Student not found");
+
+    if (!payload.name || !payload.mobile) {
+      throw new BadRequestError("Name and mobile are required");
+    }
+
+    student.stipendBeneficiary = {
+      name: payload.name,
+      mobile: payload.mobile,
+      relation: payload.relation ?? "guardian",
+      paymentMethod: payload.paymentMethod ?? "mobile_banking",
+      walletProvider: payload.walletProvider,
+      isActive: true,
+      updatedAt: new Date(),
+    };
+
+    await student.save();
+    return student;
+  },
+
+  async getStipendBeneficiary(studentUid: string) {
+    const student = await Student.findOne(
+      { studentUid },
+      { stipendBeneficiary: 1 }
+    ).lean();
+
+    if (!student) throw new NotFoundError("Student not found");
+
+    return student.stipendBeneficiary;
+  },
 };
+

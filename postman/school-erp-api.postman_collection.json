@@ -1,0 +1,221 @@
+{
+  "info": {
+    "_postman_id": "school-erp-api",
+    "name": "School ERP API",
+    "description": "Enterprise-grade School ERP Backend API (Auth, Student, Academic Record, Result, Promotion, ID Card, Public Verify)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000/api/v1" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{{AUTH.login}}" },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{base_url}}/auth/me", "path": ["auth", "me"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Student",
+      "item": [
+        {
+          "name": "Create Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{{STUDENT.create}}" },
+            "url": { "raw": "{{base_url}}/students", "path": ["students"] }
+          }
+        },
+        {
+          "name": "Get Student",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/students/STD-1001",
+              "path": ["students", "STD-1001"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Student Stipend",
+      "item": [
+        {
+          "name": "Update Stipend Beneficiary",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{{STIPEND.updateBeneficiary}}" },
+            "url": {
+              "raw": "{{base_url}}/students/STD-1001/stipend-beneficiary",
+              "path": ["students", "STD-1001", "stipend-beneficiary"]
+            }
+          }
+        },
+        {
+          "name": "Get Stipend Beneficiary",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/students/STD-1001/stipend-beneficiary",
+              "path": ["students", "STD-1001", "stipend-beneficiary"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Academic Record",
+      "item": [
+        {
+          "name": "Upsert Draft (Terminal)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{ACADEMIC_RECORD.draft_terminal}}"
+            },
+            "url": {
+              "raw": "{{base_url}}/academic-records/draft",
+              "path": ["academic-records", "draft"]
+            }
+          }
+        },
+        {
+          "name": "Submit Record",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{{ACADEMIC_ACTIONS.submit}}" },
+            "url": {
+              "raw": "{{base_url}}/academic-records/submit",
+              "path": ["academic-records", "submit"]
+            }
+          }
+        },
+        {
+          "name": "Publish Record (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{{ACADEMIC_ACTIONS.publish}}" },
+            "url": {
+              "raw": "{{base_url}}/academic-records/publish",
+              "path": ["academic-records", "publish"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Result",
+      "item": [
+        {
+          "name": "Get Class Result Sheet",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/results/class?class=5&session=2024&scope=terminal&terminalKey=T1",
+              "path": ["results", "class"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Marksheet",
+      "item": [
+        {
+          "name": "Download Marksheet PDF",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{base_url}}/marksheet/STD-1001?scope=terminal&terminalKey=T1",
+              "path": ["marksheet", "STD-1001"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Promotion",
+      "item": [
+        {
+          "name": "Promote Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{{PROMOTION.promoteStudent}}" },
+            "url": {
+              "raw": "{{base_url}}/students/STD-1001/promote",
+              "path": ["students", "STD-1001", "promote"]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Public",
+      "item": [
+        {
+          "name": "Verify (QR)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{{PUBLIC_VERIFY.resultQR}}" },
+            "url": {
+              "raw": "{{base_url}}/public/verify",
+              "path": ["public", "verify"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,20 @@
 import { Student } from "./student.model";
-import { BadRequestError, NotFoundError } from "../../core/errors/";
+import { BadRequestError, NotFoundError } from "../../core/errors";
 
 export const StudentService = {
   async create(payload: any) {
-    return Student.create(payload);
+    const exists = await Student.findOne({
+      studentUid: payload.studentUid,
+    });
+
+    if (exists) {
+      throw new BadRequestError("Student UID already exists");
+    }
+
+    return Student.create({
+      ...payload,
+      birthDate: new Date(payload.birthDate),
+    });
   },
 
   async list(query: any) {
@@ -17,13 +28,18 @@ export const StudentService = {
   async updateStatus(studentUid: string, status: string) {
     const update: any = { status };
     if (status === "archived") update.archivedAt = new Date();
-    return Student.findOneAndUpdate({ studentUid }, update, {
+
+    const student = await Student.findOneAndUpdate({ studentUid }, update, {
       new: true,
     }).lean();
+
+    if (!student) throw new NotFoundError("Student not found");
+
+    return student;
   },
 
   async promote(studentUid: string, entry: any) {
-    return Student.findOneAndUpdate(
+    const student = await Student.findOneAndUpdate(
       { studentUid },
       {
         $push: { promotions: entry },
@@ -31,26 +47,23 @@ export const StudentService = {
           status: entry.result === "repeat" ? "repeat" : "active",
           "current.class": entry.toClass,
           "current.roll": entry.newRoll,
+          "current.session": entry.session,
         },
       },
       { new: true }
     ).lean();
+
+    if (!student) throw new NotFoundError("Student not found");
+
+    return student;
   },
 
-   async updateStipendBeneficiary(studentUid: string, payload: any) {
+  async updateStipendBeneficiary(studentUid: string, payload: any) {
     const student = await Student.findOne({ studentUid });
     if (!student) throw new NotFoundError("Student not found");
 
-    if (!payload.name || !payload.mobile) {
-      throw new BadRequestError("Name and mobile are required");
-    }
-
     student.stipendBeneficiary = {
-      name: payload.name,
-      mobile: payload.mobile,
-      relation: payload.relation ?? "guardian",
-      paymentMethod: payload.paymentMethod ?? "mobile_banking",
-      walletProvider: payload.walletProvider,
+      ...payload,
       isActive: true,
       updatedAt: new Date(),
     };
@@ -70,4 +83,3 @@ export const StudentService = {
     return student.stipendBeneficiary;
   },
 };
-

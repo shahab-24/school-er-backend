@@ -1,30 +1,52 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model } from "mongoose";
 
 /**
- * Localized text (EN/BN/Other)
+ * 🌐 Localized text (BN / EN / future languages)
  */
 const LocalizedSchema = new Schema({}, { strict: false, _id: false });
 
 /**
- * Guardian
+ * 👨‍👩‍👦 Parent (Father / Mother)
  */
-const GuardianSchema = new Schema(
+const ParentSchema = new Schema(
   {
-    relation: {
-      type: String,
-      enum: ["father", "mother", "guardian"],
-      required: true,
-    },
     name: { type: LocalizedSchema, required: true },
-    mobile: { type: String },
-    nid: { type: String },
-    birthRegistration: { type: String },
+    mobile: { type: String, required: true },
+    nid: { type: String, required: true },
+    birthRegistration: { type: String, required: true },
   },
   { _id: false }
 );
 
 /**
- * Promotion History
+ * 👤 Guardian (optional – if not father/mother)
+ */
+const GuardianSchema = new Schema(
+  {
+    relation: {
+      type: String,
+      enum: ["guardian", "other"],
+      required: true,
+    },
+
+    name: { type: LocalizedSchema, required: true },
+    mobile: { type: String, required: true },
+    nid: { type: String },
+
+    /**
+     * 💳 stipend / allowance receive method
+     */
+    walletProvider: {
+      type: String,
+      enum: ["bKash", "Nagad", "Rocket", "Other"],
+      required: true,
+    },
+  },
+  { _id: false }
+);
+
+/**
+ * 📈 Promotion History
  */
 const PromotionSchema = new Schema(
   {
@@ -44,7 +66,7 @@ const PromotionSchema = new Schema(
 );
 
 /**
- * ✅ Stipend Beneficiary (embedded, single source of truth)
+ * 💰 Stipend Beneficiary (Single source of truth)
  */
 const StipendBeneficiarySchema = new Schema(
   {
@@ -66,6 +88,7 @@ const StipendBeneficiarySchema = new Schema(
     walletProvider: {
       type: String,
       enum: ["bKash", "Nagad", "Rocket", "Other"],
+      required: true,
     },
 
     isActive: { type: Boolean, default: true },
@@ -75,7 +98,7 @@ const StipendBeneficiarySchema = new Schema(
 );
 
 /**
- * Student
+ * 🎓 Student (Final Production Schema)
  */
 const StudentSchema = new Schema(
   {
@@ -91,18 +114,45 @@ const StudentSchema = new Schema(
     gender: {
       type: String,
       enum: ["male", "female", "other"],
+      required: true,
     },
 
-    religion: { type: String },
-    birthDate: { type: Date },
-    birthRegistration: { type: String },
+    religion: { type: String, required: true },
+    birthDate: { type: Date, required: true },
+    birthRegistration: { type: String, required: true },
 
-    languagePreference: { type: String, default: "en" },
-
-    guardians: { type: [GuardianSchema], default: [] },
+    languagePreference: {
+      type: String,
+      enum: ["bn", "en"],
+      default: "bn",
+    },
 
     /**
-     * ✅ stipend / upobritti receiver
+     * 👨 Father (mandatory)
+     */
+    father: {
+      type: ParentSchema,
+      required: true,
+    },
+
+    /**
+     * 👩 Mother (mandatory)
+     */
+    mother: {
+      type: ParentSchema,
+      required: true,
+    },
+
+    /**
+     * 👤 Optional guardians
+     */
+    guardians: {
+      type: [GuardianSchema],
+      default: [],
+    },
+
+    /**
+     * 💰 stipend / upobritti receiver
      */
     stipendBeneficiary: {
       type: StipendBeneficiarySchema,
@@ -112,9 +162,9 @@ const StudentSchema = new Schema(
     imageUrl: { type: String },
 
     current: {
-      session: { type: String, index: true },
-      class: { type: Number, index: true },
-      roll: { type: Number },
+      session: { type: String, index: true, required: true },
+      class: { type: Number, index: true, required: true },
+      roll: { type: Number, required: true },
     },
 
     status: {

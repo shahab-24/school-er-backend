@@ -47,4 +47,12 @@ export const AuthController = {
       });
     }
   },
-};
+
+
+ async me(req: Request, res: Response) {
+    res.json({
+      success: true,
+      user: (req as any).user,
+    })
+ 
+}}

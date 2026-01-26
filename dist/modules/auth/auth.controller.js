@@ -43,5 +43,11 @@ exports.AuthController = {
             });
         }
     },
+    async me(req, res) {
+        res.json({
+            success: true,
+            user: req.user,
+        });
+    }
 };
 //# sourceMappingURL=auth.controller.js.map

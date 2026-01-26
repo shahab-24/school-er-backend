@@ -1,2 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-export declare function authenticate(): (req: Request, res: Response, next: NextFunction) => Response<any, Record<string, any>> | undefined;
+export interface AuthRequest extends Request {
+    user?: {
+        userId: string;
+        role: string;
+        email?: string;
+    };
+}
+export declare const authenticate: () => (req: AuthRequest, res: Response, next: NextFunction) => Response<any, Record<string, any>> | undefined;

@@ -4,24 +4,32 @@ import {
   createStudentSchema,
   updateStatusSchema,
   promoteSchema,
+  stipendBeneficiarySchema,
 } from "./student.validation";
 
 export const StudentController = {
   async create(req: Request, res: Response) {
     const data = createStudentSchema.parse(req.body);
-    const doc = await StudentService.create(data);
-    res.status(201).json(doc);
+
+    const student = await StudentService.create(data);
+
+    res.status(201).json({
+      success: true,
+      data: student,
+    });
   },
 
   async list(req: Request, res: Response) {
     const docs = await StudentService.list(req.query);
-    res.json(docs);
+    res.json({ success: true, data: docs });
   },
 
   async get(req: Request, res: Response) {
     const doc = await StudentService.getByUid(req.params.studentUid);
-    if (!doc) return res.status(404).json({ message: "Not found" });
-    res.json(doc);
+    if (!doc) {
+      return res.status(404).json({ success: false, message: "Not found" });
+    }
+    res.json({ success: true, data: doc });
   },
 
   async updateStatus(req: Request, res: Response) {
@@ -30,20 +38,20 @@ export const StudentController = {
       req.params.studentUid,
       status
     );
-    res.json(doc);
+    res.json({ success: true, data: doc });
   },
 
   async promote(req: Request, res: Response) {
     const entry = promoteSchema.parse(req.body);
     const doc = await StudentService.promote(req.params.studentUid, entry);
-    res.json(doc);
+    res.json({ success: true, data: doc });
   },
+
   async updateStipendBeneficiary(req: Request, res: Response) {
-    const { studentUid } = req.params;
-    const data = req.body;
+    const data = stipendBeneficiarySchema.parse(req.body);
 
     const student = await StudentService.updateStipendBeneficiary(
-      studentUid,
+      req.params.studentUid,
       data
     );
 
@@ -55,13 +63,10 @@ export const StudentController = {
   },
 
   async getStipendBeneficiary(req: Request, res: Response) {
-    const { studentUid } = req.params;
+    const beneficiary = await StudentService.getStipendBeneficiary(
+      req.params.studentUid
+    );
 
-    const beneficiary = await StudentService.getStipendBeneficiary(studentUid);
-
-    res.json({
-      success: true,
-      data: beneficiary,
-    });
+    res.json({ success: true, data: beneficiary });
   },
 };

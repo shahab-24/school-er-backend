@@ -1,27 +1,35 @@
-// src/routes.ts - SIMPLE STATIC VERSION
+// src/routes.ts
 import { Router } from "express";
-import { AuthController } from "./modules/auth/auth.controller";
+import authRoutes from "./modules/auth/auth.routes";
+import studentRoutes from "./modules/student/student.routes";
+// import AcademicRecord from "./modules/student/student.routes";
+import academicRecordRoutes from "./modules/academic-record/academicRecord.routes";
 
 const router = Router();
 
-// API info route
+// API root info
 router.get("/", (_req, res) => {
   res.json({
     success: true,
-    message: "KHIRAM GOVERNMENT PRIMARY SCHOOL ERP API v1.0",
-    endpoints: {
-      "auth/login": "POST /api/v1/auth/login",
-      health: "GET /health",
-      api: "GET /api/v1",
-    },
+    message: "KHIRAM GOVERNMENT PRIMARY SCHOOL ERP API",
     version: "1.0.0",
+    endpoints: {
+      auth: "/api/v1/auth",
+      health: "/health",
+    },
     timestamp: new Date().toISOString(),
-    school: process.env.SCHOOL_NAME_EN,
   });
 });
 
-// ✅ DIRECT ROUTES - No dynamic imports needed
-router.post("/auth/login", AuthController.login);
+// ✅ ONLY module routers
+router.use("/auth", authRoutes);
+
+
+// (later)
+router.use("/students", studentRoutes);
+router.use("/academic-records", academicRecordRoutes);
+
+
 
 // Placeholder routes for other endpoints
 router.get("/students", (req, res) => {
